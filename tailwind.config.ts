@@ -61,7 +61,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				brand: {
+					pink: '#FFB6C1',
+					lightpink: '#FDE1D3',
+					coral: '#FF6B6B',
+					peach: '#FFA69E',
+					yellow: '#FFECB3',
+					lightyellow: '#FEF7CD',
+					teal: '#66D9E8',
+					mint: '#A8E6CF',
+					purple: '#E5DEFF',
 				}
+			},
+			fontFamily: {
+				sans: ['Vazirmatn', 'sans-serif'],
+				display: ['Vazirmatn', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,13 +99,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'slide-right': {
+					'0%': { transform: 'translateX(-20px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'slide-right': 'slide-right 0.5s ease-out'
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("tailwindcss-rtl"),
+	],
 } satisfies Config;
