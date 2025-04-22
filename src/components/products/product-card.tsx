@@ -1,9 +1,10 @@
 
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BadgeButton } from "@/components/ui/badge-button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFavorites } from "@/context/favorites-context";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   id: string;
@@ -30,12 +31,18 @@ const ProductCard = ({
   reviewCount = 0,
   isBestseller = false,
 }: ProductCardProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const toggleLike = (e: React.MouseEvent) => {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const { toast } = useToast();
+  
+  const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsLiked(!isLiked);
+    toggleFavorite(id);
+    
+    toast({
+      title: isFavorite(id) ? "از علاقه‌مندی‌ها حذف شد" : "به علاقه‌مندی‌ها اضافه شد",
+      description: isFavorite(id) ? `${title} از لیست علاقه‌مندی‌های شما حذف شد` : `${title} به لیست علاقه‌مندی‌های شما اضافه شد`,
+    });
   };
 
   const formattedPrice = new Intl.NumberFormat('fa-IR').format(price);
@@ -64,10 +71,11 @@ const ProductCard = ({
           
           {/* Like button */}
           <button
-            onClick={toggleLike}
+            onClick={handleToggleFavorite}
             className="absolute top-2 left-2 p-1.5 rounded-full bg-white/80 hover:bg-white text-gray-600 hover:text-brand-coral transition-colors"
+            aria-label={isFavorite(id) ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"}
           >
-            <Heart className={cn("h-4 w-4", isLiked && "fill-brand-coral text-brand-coral")} />
+            <Heart className={cn("h-4 w-4", isFavorite(id) && "fill-brand-coral text-brand-coral")} />
           </button>
           
           {/* New badge */}

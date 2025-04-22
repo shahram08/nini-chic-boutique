@@ -14,6 +14,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProductsManagement from "./pages/admin/ProductsManagement";
 import AuthPage from "./pages/auth/AuthPage";
 import CartPage from "./pages/cart/CartPage";
+import FavoritesPage from "./pages/favorites/FavoritesPage";
+import { FavoritesProvider } from "./context/favorites-context";
 
 const queryClient = new QueryClient();
 
@@ -22,33 +24,36 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          {/* Main Site Routes */}
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Index />} />
-            <Route path="/category/:categoryId" element={<CategoryPage />} />
-            <Route path="/product/:productId" element={<ProductDetail />} />
-            <Route path="/special-offers" element={<CategoryPage />} />
-            <Route path="/new-arrivals" element={<CategoryPage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/cart" element={<CartPage />} />
-          </Route>
+      <FavoritesProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Main Site Routes */}
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Index />} />
+              <Route path="/category/:categoryId" element={<CategoryPage />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route path="/special-offers" element={<CategoryPage />} />
+              <Route path="/new-arrivals" element={<CategoryPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/cart" element={<CartPage />} />
+            </Route>
 
-          {/* Admin Panel Routes */}
-          <Route path="/admin" element={<AdminPanel />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="products" element={<ProductsManagement />} />
-            <Route path="orders" element={<AdminDashboard />} />
-            <Route path="users" element={<AdminDashboard />} />
-            <Route path="reports" element={<AdminDashboard />} />
-            <Route path="settings" element={<AdminDashboard />} />
-          </Route>
+            {/* Admin Panel Routes */}
+            <Route path="/admin" element={<AdminPanel />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="products" element={<ProductsManagement />} />
+              <Route path="orders" element={<AdminDashboard />} />
+              <Route path="users" element={<AdminDashboard />} />
+              <Route path="reports" element={<AdminDashboard />} />
+              <Route path="settings" element={<AdminDashboard />} />
+            </Route>
 
-          {/* 404 Route */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+            {/* 404 Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </FavoritesProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

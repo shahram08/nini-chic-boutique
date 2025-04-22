@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -168,6 +167,18 @@ const categoryInfo = {
     description: "کفش‌های راحت و با کیفیت برای کودکان، طراحی شده برای حمایت از پاهای در حال رشد",
     banner: "https://images.unsplash.com/photo-1514047882-673e26ac7c3c?q=80&w=1200",
     color: "brand-mint"
+  },
+  "special-offers": {
+    title: "پیشنهادات ویژه",
+    description: "محصولات با تخفیف‌های ویژه و فوق‌العاده",
+    banner: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?q=80&w=1200",
+    color: "brand-coral"
+  },
+  "new-arrivals": {
+    title: "محصولات جدید",
+    description: "تازه‌ترین محصولات اضافه شده به فروشگاه ما",
+    banner: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200",
+    color: "brand-teal"
   }
 };
 
@@ -219,7 +230,17 @@ const CategoryPage = () => {
 
   // Filter products by category
   const filteredProducts = products.filter(product => {
-    if (!categoryId || categoryId === 'all') return true;
+    if (!categoryId) return true;
+    
+    // Handle special categories
+    if (categoryId === 'special-offers') {
+      return product.discount && product.discount > 0;
+    }
+    if (categoryId === 'new-arrivals') {
+      return product.isNew === true;
+    }
+    if (categoryId === 'all') return true;
+    
     return product.category === categoryId;
   });
 
