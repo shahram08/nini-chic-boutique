@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,8 @@ import ProductDetail from "./pages/ProductDetail";
 import AdminPanel from "./pages/admin/AdminPanel";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProductsManagement from "./pages/admin/ProductsManagement";
+import AuthPage from "./pages/auth/AuthPage";
+import CartPage from "./pages/cart/CartPage";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,8 @@ const App = () => (
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/special-offers" element={<CategoryPage />} />
             <Route path="/new-arrivals" element={<CategoryPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
 
           {/* Admin Panel Routes */}
