@@ -6,7 +6,7 @@ export const products = [
     title: "پیراهن راه راه پسرانه طرح دریایی",
     price: 189000,
     discountedPrice: 149000,
-    image: "/lovable-uploads/e43aa346-34b6-4892-8fb0-c20e9440afde.png",
+    image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=500",
     discount: 20,
     isNew: true,
     rating: 4.8,
